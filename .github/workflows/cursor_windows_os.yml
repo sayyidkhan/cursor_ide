@@ -1,0 +1,41 @@
+name: Cursor Windows OS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set tag name
+        id: tag
+        run: echo "TAG_NAME=v1.0.0" >> $GITHUB_ENV
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Create and push Git tag
+        run: |
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+
+      - name: Download Windsurf Installer
+        run: |
+          curl -L -o Cursor-Windows-x64-1.0.0.exe \
+          https://downloads.cursor.com/production/53b99ce608cba35127ae3a050c1738a959750865/win32/x64/system-setup/CursorSetup-x64-1.0.0.exe
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          files: Cursor-Windows-x64-1.0.0.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
