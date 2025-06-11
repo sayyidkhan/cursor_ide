@@ -25,15 +25,20 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-      - name: Create and push Git tag
+      - name: Create and push Git tag if not exists
         run: |
-          git tag $TAG_NAME
-          git push origin $TAG_NAME
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME"; then
+            echo "Tag $TAG_NAME already exists in the remote. Skipping tag creation."
+          else
+            git tag $TAG_NAME
+            git push origin $TAG_NAME
+          fi
 
       - name: Download Cursor Installer
         run: |
           curl -L -o Cursor-Windows-x64-User-1.0.0.exe \
           https://downloads.cursor.com/production/9f54c226145b02c8dd0771069db954e0ab5fa1b8/win32/x64/user-setup/CursorUserSetup-x64-1.0.1.exe
+
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
