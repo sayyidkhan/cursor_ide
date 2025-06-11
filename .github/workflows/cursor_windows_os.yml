@@ -3,6 +3,9 @@ name: Cursor Windows OS
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write  # Allows pushing tags and uploading releases
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -27,7 +30,7 @@ jobs:
           git tag $TAG_NAME
           git push origin $TAG_NAME
 
-      - name: Download Windsurf Installer
+      - name: Download Cursor Installer
         run: |
           curl -L -o Cursor-Windows-x64-1.0.0.exe \
           https://downloads.cursor.com/production/53b99ce608cba35127ae3a050c1738a959750865/win32/x64/system-setup/CursorSetup-x64-1.0.0.exe
