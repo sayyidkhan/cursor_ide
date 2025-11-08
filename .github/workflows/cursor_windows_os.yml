@@ -36,12 +36,12 @@ jobs:
 
       - name: Download Cursor Installer
         run: |
-          curl -L -o Cursor-Windows-x64-User-1.7.54.exe \
-          https://downloads.cursor.com/production/5c17eb2968a37f66bc6662f48d6356a100b67be8/win32/x64/user-setup/CursorUserSetup-x64-1.7.54.exe
+          curl -L -o Cursor-Windows-x64-User-2.0.69.exe \
+          https://downloads.cursor.com/production/63fcac100bd5d5749f2a98aa47d65f6eca61db39/win32/x64/user-setup/CursorUserSetup-x64-2.0.69.exe
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}
-          files: Cursor-Windows-x64-User-1.7.54.exe
+          files: Cursor-Windows-x64-User-2.0.69.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
