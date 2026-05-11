@@ -51,14 +51,24 @@ cursor-work
 The clickable shortcut created on this Mac lives here:
 
 ```text
-/Users/sayyid/Applications/Cursor Work.app
+/Applications/Cursor Work.app
 ```
+
+This app uses a purple Cursor-style icon so it is easy to tell apart from the normal Cursor app in Launchpad.
 
 You can open it with Spotlight:
 
 1. Press `Cmd + Space`
 2. Type `Cursor Work`
 3. Press `Enter`
+
+You can also open it from Launchpad by searching for `Cursor Work`.
+
+The launcher opens Cursor with this profile folder:
+
+```bash
+open -na "/Applications/Cursor.app" --args --user-data-dir="$HOME/Cursor_Work"
+```
 
 ## Profile Folder Locations
 
@@ -79,3 +89,4 @@ macOS profile folder:
 - Close Cursor completely before opening another profile if Cursor reuses the existing window.
 - Use a different `--user-data-dir` value for each separate account.
 - The profile folder is created automatically the first time you launch Cursor with that path.
+- On this Mac, the `Cursor Work.app` shortcut is only a launcher. Your actual Cursor settings and account data live in `/Users/sayyid/Cursor_Work`.
